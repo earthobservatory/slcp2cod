@@ -1,0 +1,643 @@
+commit 52a6d0691632cecd83115395209628baee690146
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Oct 31 08:42:23 2018 -0700
+
+    use range look 7, 8, 9 for subswath 1, 2, 3
+
+commit 3bb9834be7a42fb926cb1efcd68d459ab5a2db4f
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Oct 23 09:59:09 2018 -0700
+
+    exit if no COD products are generated
+
+commit 88bd4a5b062e4e41104f4874c9604f46884e7029
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Oct 22 21:52:04 2018 +0000
+
+    update enumeration using minmax over swath
+
+commit 6894b697483a2ab1a718f1c51613ea43db39834f
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Oct 22 17:52:39 2018 +0000
+
+    fix network selection bugs
+
+commit 1f2b6832f31011dd9c70f9a31641acc189db73e7
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Oct 22 17:37:25 2018 +0000
+
+    type for params
+
+commit 048e3c844d2a7fe40359e34ae22b2bab63d8132a
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Oct 22 10:35:20 2018 -0700
+
+    update minmatch and min_threshold
+
+commit 4e84bd8005eaf87057ee60ccc1982b4d94e668cc
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Oct 22 10:28:40 2018 -0700
+
+    network selection uses minmatch and minimum_overlap
+
+commit e45d87978981d72fef06b81c581d4f11b1aa3b4a
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Sun Oct 14 23:07:39 2018 -0700
+
+    update hash for long job_names
+
+commit 398d9facbec90f3c206bc07177b6020fdadd5716
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Sun Oct 14 22:59:54 2018 -0700
+
+    Update query.py
+
+commit f4319103c04397e56c0dc27480a8b05675badb6c
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Oct 12 21:08:12 2018 -0700
+
+    add ds.json
+
+commit 48f7c00d58522a308bd8cceaf65009ba5d84c80c
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Oct 12 20:44:34 2018 -0700
+
+    add frame number in cod id
+
+commit 10bea697514df74c97222edb735b7b8299f45074
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Oct 11 09:20:42 2018 -0700
+
+    aoi name and hexdigest
+
+commit 29b9d1ad5fc328ba366c7c55db576cb26ee8575e
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Oct 11 09:05:51 2018 -0700
+
+    fix dirname length for network selection
+
+commit f27d0a9a645a8a6987f72a6ea9101d10115d5dca
+Merge: 3b986f3 f2c2963
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 16:37:18 2018 -0700
+
+    merge dev
+
+commit f2c29631c6b4f2645968c093d471f13db9ede54f
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 16:13:00 2018 -0700
+
+    update output info in stdout
+
+commit ff2cfd3996a0fa14880bfa8b2c89ce1a5909a45c
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 13:32:12 2018 -0700
+
+    use swath from met
+
+commit fc0d9a3feeade9d196212f524e1de7ae25797a00
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 13:24:31 2018 -0700
+
+    ensure subswath match in network selection pairing
+
+commit 63dd550d7701fb08caba52bea02a77cecccf8942
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 10:42:24 2018 -0700
+
+    update parsing of title for product to include subswath
+
+commit ab3ff9b126f5f2c30d672bc851a3a0cc099137f2
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 09:45:01 2018 -0700
+
+    update facet wrapper
+
+commit d28176c2ce35528425163315163551ff50437628
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 09:01:12 2018 -0700
+
+    urls parameter
+
+commit 3d8ddc2194c6187830d676c4f9495256ba230913
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 09:00:25 2018 -0700
+
+    extraneous comma
+
+commit bac8e7aec095a600e41ffd19da40c1735f2b8182
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 08:59:32 2018 -0700
+
+    add facet wrapper
+
+commit 70b83cc8a3f9762102e23f5cdf22c94f08813961
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 08:38:48 2018 -0700
+
+    use correct param
+
+commit f83d25eb3a9e89b3b18bec63e8bc9fafd49bdaee
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 08:37:31 2018 -0700
+
+    enable dedup for COD direct submission
+
+commit 8e1e363350c29e4dccebd96b3aec2e118e380895
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Sep 19 08:32:40 2018 -0700
+
+    docker params for network selection
+
+commit 937c07aab2211b58db7816207668d1ebb07f9569
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 17:04:53 2018 -0700
+
+    pull subswath only once
+
+commit 7732eb704cc0a49be0b9f11a466f8530b7397267
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 16:45:43 2018 -0700
+
+    pull localize urls
+
+commit 3e3867e698a243f2793784ca13951a913ec55f16
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 16:39:29 2018 -0700
+
+    remove input args
+
+commit 13eff38a5b57c536a825605ec7dbbfa4f560cc88
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 22:48:24 2018 +0000
+
+    update query for proper submission
+
+commit a316296bf48a52f50d0a9e0e2b519dad2b8932df
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 15:11:14 2018 -0700
+
+    fix passing of uid for slcp pairs
+
+commit 0ab6e054b7f7bd33cb79d502f6b551aa8836dde0
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 15:01:27 2018 -0700
+
+    update utc timezone
+
+commit 26c3fa9e0e99065ca5e0b434a91371e0e5ca62f0
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 14:45:20 2018 -0700
+
+    force all time comparisons to be utc
+
+commit d46218e9089f1f9b760b5638b60f5028d00b4ac7
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 12:42:25 2018 -0700
+
+    add aoi name
+
+commit 0d006642e6b8734037c4c99d7f38062a0d9c994e
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 12:41:17 2018 -0700
+
+    fix event time parsing
+
+commit f6949164da02ec4d04253b4ae2072a14b8955130
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 12:23:41 2018 -0700
+
+    update Dockerfile for shapely
+
+commit a3a79c7b7e14a4941c9dc95f4d0325b11ede067a
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 12:20:11 2018 -0700
+
+    update lambda
+
+commit 756e73499b44bec042809b1c7da3267d352728c1
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 12:15:25 2018 -0700
+
+    remove query param
+
+commit ad16157971942b190d715aa6b47f5dffed99e7b1
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 12:14:29 2018 -0700
+
+    fix spec
+
+commit eb13149fc4785601a47664a12eb1819f2f6a67cb
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 12:08:53 2018 -0700
+
+    update network selection url handling
+
+commit 12e01f71abadbb7e42ac4e32b8f680b857fc0244
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Sep 18 11:21:32 2018 -0700
+
+    update network selector to look at aoi extent and not baseline
+
+commit e8386d4f95d53a0c6e049060093d58f4a373b808
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Sun Sep 16 12:45:24 2018 -0700
+
+    update query template for returns
+
+commit 3b986f31557101be1cb433628d283259e03c5dfd
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Sat Sep 15 12:46:38 2018 -0700
+
+    process by subswath
+
+commit 790fd93243cadc0d018a62f90783d3a59e21ee75
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Sat Sep 15 12:45:35 2018 -0700
+
+    add subswath to out product dir
+
+commit 1c54c1ce6e3157a01033a747ef5cfeb77e203b35
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Sat Sep 15 10:40:50 2018 -0700
+
+    remove slcp's on completion for publish
+
+commit 3054182638ed584147770894351cdb417ad760ba
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Sep 14 05:26:59 2018 +0000
+
+    permissions on install
+
+commit e54f490e479cedb377a44f8119b7b8cc521c2c8c
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Sep 14 05:22:44 2018 +0000
+
+    use latest dockerfile & run geo_with_ll.py properly
+
+commit 3aea010200b53ec28480559f475a4660c627aef7
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Sep 14 04:46:39 2018 +0000
+
+    update dockerfile to include shapely
+
+commit e4a80bc9184c5fe6ee22060beb703c4e403f1f77
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Sep 14 04:43:29 2018 +0000
+
+    update extent calculation
+
+commit 5c8e527d8ac98ec0624a37dd192794606fc0efad
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Sep 14 00:28:22 2018 +0000
+
+    update to determine range and azimuth looks from slcp products
+
+commit a2b4567600b5a172487d04057bc5ff97ae19ced6
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Aug 9 10:54:59 2018 -0700
+
+    update to bounds parsing & network selection version passthrough
+
+commit 189bd9d2e02b1adad1cec799811167455a7b58f0
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Aug 8 14:39:26 2018 -0700
+
+    update bounds determination
+
+commit dad865b4b7ae75747e67bbc4289d59113d5022ac
+Author: Gerald Manipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Apr 18 17:21:10 2018 +0000
+
+    handle redundant output directories when not all subswaths exist
+
+commit d225b91cae6b8cbad83294aa6ad8e233e5f5c085
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Feb 13 15:51:43 2018 -0800
+
+    run for all subswaths
+
+commit 695e4c948e49d0b10c2d343d19570686776e7475
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Jan 12 16:38:56 2018 -0800
+
+    update query parameters
+
+commit 2aed6fa52d7121f7a7a512064091532acbb5a1bd
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Jan 11 10:41:40 2018 -0800
+
+    update project tag to include urgent-response
+
+commit f51e559d6cb7acf8025beeafe448d3117c0ebf91
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Jan 10 23:02:38 2018 -0800
+
+    supporting AOI met ['event']['time'] in addition to ['event_time']
+
+commit 2cdac7113992baada2ff83adbaf49ba5ccc7c718
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Dec 29 20:17:32 2017 +0000
+
+    fix directory param in docker inputs for network selection
+
+commit 1a61b9136cda4e6b5e3dd936bc8e9d2c4e3b1ce5
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 28 18:04:13 2017 -0800
+
+    clean old product dirs and add version v1.0
+
+commit db2bea5a25eb57fb7cf4ea467883a4d9ecdb942e
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 28 17:38:32 2017 -0800
+
+    update version number & complete metadata geojson parsing
+
+commit edaa3ce8d5e5f315c240093d7fbbdf6bb22fb3c6
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Dec 29 00:05:06 2017 +0000
+
+    export proper datasets and met json
+
+commit 886579a7144c12583bf7a934f863c704504b61ce
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 28 23:21:33 2017 +0000
+
+    adding gdal parsing of metadata for full extent
+
+commit 6ddeefcfdf084bd606c8529dbf91c700311198cb
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 28 22:15:02 2017 +0000
+
+    wiring version and pulling output vars from context
+
+commit 9cddae9c1409d31545e1b02dcf6fa235aaa5084b
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 28 21:48:06 2017 +0000
+
+    fix syntax with naming
+
+commit 6658760f0aabf7115cd004482067d97308803e0a
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 28 21:15:31 2017 +0000
+
+    append version
+
+commit f00adad701275bf72d18bc58278d28bb885fb4e7
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 28 20:55:34 2017 +0000
+
+    adding dtag to product name
+
+commit a377b00d6bfea5465609251726a32e5d6453e750
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 28 20:48:13 2017 +0000
+
+    update datetime regex
+
+commit a0c872f45695537c6651dbaf6c2157856b0f5478
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 28 20:08:08 2017 +0000
+
+    increase size of container for cod products
+
+commit 4816052ce6660b15f75bdb7cba01b6adbe350616
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 28 19:19:35 2017 +0000
+
+    adding dataset_tag and project wiring through facet, network_selection, and cod jobs
+
+commit aea6fa1c2c75dac9e9ecd339095fba73f6c8fe15
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Dec 27 19:09:39 2017 +0000
+
+    adding metadata fields
+
+commit 01ca1d4b0573e51021e0d513cb79864429e1143c
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 21 22:08:53 2017 +0000
+
+    order COD names from start->shared->end
+
+commit 5cc5b3ff6e8d0f2cd9c06d1bcc69147a40b19487
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 21 20:42:20 2017 +0000
+
+    update to cod product naming convention
+
+commit 44f46e2ab0ee998c510be4d7c14a175b3adf66f9
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 21 17:55:06 2017 +0000
+
+    export isce variables
+
+commit 4fffbc2450e9bb6c49a4f453c2c72476c0fc8008
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 21 00:44:23 2017 +0000
+
+    lower cod generation disk size requirement
+
+commit 43acc8e2381eddbbb27a869b5b8d13b90c7b2a8f
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Dec 21 00:33:11 2017 +0000
+
+    update es query and param generation
+
+commit 21d9b21c9a212b2eb6118ff80580d11e02c20fc3
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Dec 20 00:58:51 2017 +0000
+
+    update params
+
+commit 3cd7cdb64774a28e3e2f0a4d887ecaf0c17cf75c
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Wed Dec 20 00:56:25 2017 +0000
+
+    added es aoi reverse query
+
+commit f7a8312e5d91581b03ee360f6f689adaa2823afe
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Tue Dec 19 15:16:43 2017 -0800
+
+    update network selection + facet to kickoff cod generation
+
+commit 170731262fee8fcb9cd669c85b60dbb0cba3a0b5
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Nov 6 13:14:13 2017 -0800
+
+    update env vars for aws creds
+
+commit 640f80775d52df56be15fe1309ec065157806dbc
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Nov 6 12:44:42 2017 -0800
+
+    source env params
+
+commit 8e7b4667c7993905fef61cbbcb1dc490fb4d6571
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Nov 6 12:36:07 2017 -0800
+
+    parse S1-COD  name from inputs
+
+commit c8b2800692432300c05e1280b37a3b0e15c824fa
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Nov 6 12:18:06 2017 -0800
+
+    build output product dirs
+
+commit 979005ed7f11c3e5d941cad0a3e92e0acc877daf
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Nov 6 11:42:06 2017 -0800
+
+    set env variables
+
+commit ef63f367b21a0b9c4ca94779d2bf9ad314342c0e
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Nov 6 10:48:37 2017 -0800
+
+    update cod script to call params, dynamically assign swath
+
+commit 04deb8cbc2db639b4ad6ced101cde13094cec8c4
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Nov 6 00:55:15 2017 -0800
+
+    call cod generation from script dir
+
+commit 08476dd7648a323b36dae7387ec9c7d4f495eb3c
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Nov 6 00:22:11 2017 -0800
+
+    localize products to dir
+
+commit 760245290a499d6608b42f8d716dee81f78c0fe2
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Mon Nov 6 00:01:35 2017 -0800
+
+    update input args
+
+commit a2a1591600ab45681d1168b448e80656dd09e480
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Sun Nov 5 23:52:45 2017 -0800
+
+    call wrapper from docker json
+
+commit 7ce22ade52f1d16f2ffb192552364974c38d9bac
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Sun Nov 5 23:51:14 2017 -0800
+
+    add wrapper script
+
+commit ce5385dbaf163b8de849d8a85922758a4a193b67
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Sun Nov 5 17:35:44 2017 -0800
+
+    submitter input params
+
+commit b70c12aeb31c3227aad2540176698fa9e077d19a
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Nov 3 18:36:27 2017 -0700
+
+    update cod generation
+
+commit fd60839500e240c1049526f8dfa8b20e6e223915
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Nov 3 18:19:03 2017 -0700
+
+    update data staging
+
+commit 214bf39692ff7e031202fda0b1a58d92f1a1fad9
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Nov 3 12:03:42 2017 -0700
+
+    correct bracket syntax
+
+commit 6ac329f6ff38ed426acc913b377db60664a28818
+Author: Justin P Linick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Fri Nov 3 12:02:15 2017 -0700
+
+    fix dataset jpath
+
+commit 794866b69a7d798ce7bafc3154cce68cb0c4d52d
+Merge: 7c65526 31a22cd
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 18:35:50 2017 +0000
+
+    Merge branch 'master' of https://github.jpl.nasa.gov/aria-hysds/slcp2cod
+
+commit 7c65526638746d598ccaff8ad1985a7947397ca0
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 18:35:07 2017 +0000
+
+    apply lambda to localize metadata inputs
+
+commit 31a22cd599af5c70f39550b06d1317c3ed35f7aa
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 11:08:19 2017 -0700
+
+    update slcp2cod init script
+
+commit 8dc1af6b131f9fa6731c21ce2a5d3b85b257b342
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 16:40:37 2017 +0000
+
+    remove extraneous slash in Dockerfile
+
+commit f9c817340f106274d45cab0e4909068dfde9cb6b
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 16:39:00 2017 +0000
+
+    set slcp2cod path
+
+commit 8473fff4a233ce30e96c3d6eaf67f859ba899e70
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 16:37:06 2017 +0000
+
+    pull url for localize
+
+commit 9d3e664dad2a2088b660d2e13f9e0597db3099bf
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 16:29:53 2017 +0000
+
+    remove lambdas
+
+commit f3157821021bdfde6fb81197e342a051b0b36c15
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 16:26:37 2017 +0000
+
+    update Dockerfile setup
+
+commit e5afe0c92cd0315db970be3a8e6e7918d7be907c
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 16:04:59 2017 +0000
+
+    install hysds_commons in docker init
+
+commit 71f9b2a706d7192d38077f2ae1c2b6091a9a3e51
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 15:59:22 2017 +0000
+
+    adding hysds_commons for lambda imports
+
+commit 493c90cdac0ed681d96b88aafecc0a39a959fc90
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 15:50:20 2017 +0000
+
+    update docker params
+
+commit 9c2f96f39cbfde38b9db63933f02d0dc8cb329e2
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 08:25:10 2017 -0700
+
+    remove lar readme
+
+commit 68c45f0b80c423ef297e1478c29899d3244ce9a3
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 08:23:00 2017 -0700
+
+    add gitignore
+
+commit c2b6ee512b9627ba9af6e389ecca95beb9990845
+Author: jlinick <Justin.P.Linick@jpl.nasa.gov>
+Date:   Thu Nov 2 08:22:37 2017 -0700
+
+    init from lar

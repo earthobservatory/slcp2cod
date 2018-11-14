@@ -1,0 +1,30 @@
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "dataset_type.raw": "area_of_interest"
+          }
+        },
+        {
+          "query_string": {
+            "query": "\"AOI_name\"",
+            "default_operator": "OR"
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    {
+      "_timestamp": {
+        "order": "desc"
+      }
+    }
+  ],
+  "fields": [
+    "_timestamp",
+    "_source"
+  ]
+}

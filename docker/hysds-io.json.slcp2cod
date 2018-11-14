@@ -1,0 +1,29 @@
+{
+  "label" : "S1 COD",
+  "allowed_accounts": [ "ops" ],
+  "submission_type": "individual",
+  "enable_dedup": true,
+  "params" : [
+    {
+      "name": "dataset_tag",
+      "from": "submitter",
+      "type": "text"
+    },
+    {
+      "name": "project",
+      "from": "submitter",
+      "type": "enum",
+      "enumerables": ["grfn", "aria"]
+    },
+    { 
+      "name": "url1",
+      "from": "submitter",
+      "type": "text"
+    },
+    { 
+      "name": "url2",
+      "from": "submitter",
+      "type": "text"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "from" : 0,
+  "size" : 200,
+  "query": {
+    "filtered": {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "term": {
+                "dataset.raw": "S1-SLCP"
+              }
+            },
+            {
+              "term": {
+                "system_version.raw": "<SLCP_VERSION>"
+              }
+            }
+          ],
+          "should": [
+            {
+              "range": {
+                "starttime": {
+                  "from": "<START_TIME>",
+                  "to": "<END_TIME>"
+                }
+              }
+            },
+            {
+              "range": {
+                "endtime": {
+                  "from": "<START_TIME>",
+                  "to": "<END_TIME>"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "filter": {
+        "geo_shape": {
+          "location": {
+            "shape": {
+              "type": "polygon",
+              "coordinates": []
+            }
+          }
+        }
+      }
+    }
+  },
+  "sort": [
+    {
+      "_timestamp": {
+        "order": "desc"
+      }
+    }
+  ],
+  "fields": [
+    "_timestamp",
+    "_source"
+  ]
+}

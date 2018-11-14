@@ -1,0 +1,29 @@
+{
+  "command":"/home/ops/verdi/ops/slcp2cod/script/slcp2cod_wrapper.sh",
+  "imported_worker_files": {
+    "/home/ops/.netrc": "/home/ops/.netrc",
+    "/home/ops/.aws": "/home/ops/.aws",
+    "/home/ops/ariamh/conf/settings.conf": "/home/ops/ariamh/conf/settings.conf"
+  },
+  "recommended-queues" : [
+    "grfn-job_worker-large",
+    "aria-job_worker-large",
+    "mem-job_worker-large",
+    "urgent-response-job_worker-large"
+  ],
+  "disk_usage":"80GB",
+  "params" : [
+    {
+      "name": "dataset_tag",
+      "destination": "context"
+    },
+    {
+      "name": "project",
+      "destination": "context"
+    },
+    {
+      "name": "urls",
+      "destination": "localize"
+    }
+  ]
+}

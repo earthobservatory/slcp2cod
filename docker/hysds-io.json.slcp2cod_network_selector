@@ -1,0 +1,43 @@
+{
+  "label" : "S1 COD - Network Selection",
+  "allowed_accounts": [ "ops" ],
+  "submission_type": "individual",
+  "enable_dedup": false,
+  "params" : [
+    {
+      "name": "dataset_tag",
+      "from": "submitter",
+      "type": "text"
+    },
+    {
+      "name": "project",
+      "from": "submitter",
+      "type": "enum",
+      "enumerables": ["grfn", "ariamh", "urgent-response", "mem"]
+    },
+    { 
+      "name": "slcp_version",
+      "from": "submitter",
+      "type": "text"
+    },
+    { 
+      "name": "aoi_name",
+      "from": "submitter",
+      "type": "text"
+    },
+    {
+      "name": "minmatch",
+      "from": "submitter",
+      "type": "text",
+      "optional": true,
+      "default": "1"
+    },
+    {
+      "name": "min_overlap",
+      "from": "submitter",
+      "type": "text",
+      "optional": true,
+      "default": "0.3"
+    }
+  ]
+}

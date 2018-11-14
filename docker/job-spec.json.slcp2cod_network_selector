@@ -1,0 +1,41 @@
+{
+  "command":"/home/ops/verdi/ops/slcp2cod/selection/query.py",
+  "imported_worker_files": {
+    "/home/ops/.netrc": "/home/ops/.netrc",
+    "/home/ops/.aws": "/home/ops/.aws",
+    "/home/ops/ariamh/conf/settings.conf": "/home/ops/ariamh/conf/settings.conf"
+  },
+  "recommended-queues" : [
+    "grfn-job_worker-large",
+    "aria-job_worker-large",
+    "mem-job_worker-large",
+    "urgent-response-job_worker-large"
+  ],
+  "disk_usage":"2GB",
+  "params" : [
+    {
+      "name": "dataset_tag",
+      "destination": "context"
+    },
+    {
+      "name": "project",
+      "destination": "context"
+    },
+    { 
+      "name": "slcp_version",
+      "destination": "positional"
+    },
+    { 
+      "name": "aoi_name",
+      "destination": "positional"
+    },
+    {
+      "name": "minmatch",
+      "destination": "context"
+    },
+    {
+      "name": "min_overlap",
+      "destination": "context"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "label" : "S1 COD - Facet Selection",
+  "allowed_accounts": [ "ops" ],
+  "submission_type": "individual",
+  "params" : [
+    {
+      "name": "dataset_tag",
+      "from": "submitter",
+      "type": "text"
+    },
+    {
+      "name": "project",
+      "from": "submitter",
+      "type": "enum",
+      "enumerables": ["aria", "grfn", "mem", "urgent-response"]
+    },
+    {
+      "name": "urls",
+      "from": "dataset_jpath:_source.urls.1",
+      "type": "text"
+    }
+  ]
+}
