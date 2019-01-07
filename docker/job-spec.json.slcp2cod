@@ -2,8 +2,7 @@
   "command":"/home/ops/verdi/ops/slcp2cod/script/slcp2cod_wrapper.sh",
   "imported_worker_files": {
     "/home/ops/.netrc": "/home/ops/.netrc",
-    "/home/ops/.aws": "/home/ops/.aws",
-    "/home/ops/ariamh/conf/settings.conf": "/home/ops/ariamh/conf/settings.conf"
+    "/home/ops/.aws": "/home/ops/.aws"
   },
   "recommended-queues" : [
     "grfn-job_worker-large",

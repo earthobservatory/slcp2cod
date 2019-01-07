@@ -3,6 +3,7 @@
 #Cunren Liang, JPL/Caltech
 
 
+import ast
 import os
 import sys
 import glob
@@ -105,7 +106,7 @@ def cmdLineParse():
     parser.add_argument('-lon', dest='lon', type=str, required=True,
             help = 'longitude file')
     parser.add_argument('-bbox', dest='bbox', type=str, required=True,
-            help='geocode bounding box (format: S/N/W/E). or you can input master frame pickle file that contains a bounding box')
+            help='geocode bounding box (format: "[S,N,W,E]". or you can input master frame pickle file that contains a bounding box')
     parser.add_argument('-ssize', dest='ssize', type=float, default=1.0,
             help = 'output sample size. default: 1.0 arcsec')
     parser.add_argument('-rmethod', dest='rmethod', type=int, default=1,
@@ -164,7 +165,7 @@ if __name__ == '__main__':
             frame = pickle.load(f)
         bbox = frame.snwe
     else:
-        bbox = [float(val) for val in inps.bbox.split('/')]
+        bbox = [float(val) for val in ast.literal_eval(inps.bbox)]
         if len(bbox) != 4:
             raise Exception('bbox should contain 4 floating point values!')
     print("geocode bounding box:")

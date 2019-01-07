@@ -280,11 +280,12 @@ if __name__ == '__main__':
         lat_min = np.amin(lat_looked_data)
         lon_max = np.amax(lon_looked_data)
         lon_min = np.amin(lon_looked_data)
-        bbox = "{}/{}/{}/{}".format(lat_min, lat_max, lon_min, lon_max)
+        bbox = [lat_min, lat_max, lon_min, lon_max]
 
         script_dir = os.path.dirname(os.path.realpath(__file__))
         cor_diff_looked_geo = 'diff_cor_%02d_%drlks_%dalks.cor.geo' % (i+1,inps.rlks,inps.alks)
-        cmd = "{}/geo_with_ll.py -input {} -output {} -lat {} -lon {} -bbox {} -ssize {} -rmethod {}".format(script_dir,
+        cmd = "{}/geo_with_ll.py -input {} -output {} -lat {} -lon {} -bbox \"{}\" -ssize {} -rmethod {}".format(
+            script_dir,
             cor_diff_looked, 
             cor_diff_looked_geo,
             lat_looked,
