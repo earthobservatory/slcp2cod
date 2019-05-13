@@ -20,7 +20,7 @@ def main(prod_dir, fn1, fn2):
         print('Found no products available for publish in workdir: {}'.format(prod_dir))
         raise Exception('No COD products were generated.')
     base = os.path.basename(prod_dir)
-    met = create_met(base, fn1, fn)
+    met = create_met(base, fn1, fn2)
     dataset = {}
     dataset_path = os.path.join(prod_dir, '{0}.dataset.json'.format(base))
     met_path = os.path.join(prod_dir, '{0}.met.json'.format(base))
