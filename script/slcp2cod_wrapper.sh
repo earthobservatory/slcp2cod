@@ -32,7 +32,7 @@ subswath=$(grep -o "[1-3]" <<< $(grep -o "_s[1-3]-" <<< ${fn1}))
 ${script_dir}/slcp2cod_S1.sh ${fn1} ${fn2} ${fout}
 
 #productize
-${script_dir}/productize.py ${fout}
+${script_dir}/productize.py ${fn1} ${fn2} ${fout}
 
 #remove old dirs
 rm -rf ${fn1}

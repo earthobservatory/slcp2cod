@@ -14,14 +14,14 @@ from shapely.geometry import Polygon, MultiPolygon, mapping
 from shapely.ops import cascaded_union
 from dateutil.parser import parse as dtparse
 
-def main(prod_dir):
+def main(prod_dir, fn1, fn2):
     #exit if there are no products
     if len(os.listdir(prod_dir)) == 0:
         print('Found no products available for publish in workdir: {}'.format(prod_dir))
         raise Exception('No COD products were generated.')
     base = os.path.basename(prod_dir)
+    met = create_met(base, fn1, fn)
     dataset = {}
-    met = {}
     dataset_path = os.path.join(prod_dir, '{0}.dataset.json'.format(base))
     met_path = os.path.join(prod_dir, '{0}.met.json'.format(base))
     #get vars
@@ -34,7 +34,9 @@ def main(prod_dir):
     dataset['dataset'] = 'S1-COD'
     dataset['label'] = base
     #parse starttime/endtime from name
-    dataset.update(parse_start_end_times(base))
+    dataset.update(met['starttime'])
+    dataset.update(met['endtime'])
+
     #parse info from context
     try:
         context = load_context()
@@ -66,7 +68,21 @@ def parse_start_end_times(base):
     end = dtparse(match.group(7)).strftime('%Y-%m-%dT%H:%M:%S')
     times['starttime'] = start
     times['endtime'] = end
+    times['sharedtime'] = mid
     return times
+
+def create_met(base, fn1, fn2):
+    master_slcp_metfile = os.path.join(fn1, fn1 + '.met.json')
+    master_slcp_met = load_file(master_slcp_metfile)
+    met = {}
+    met.update(parse_start_end_times(base))
+    wanted_slcp_keys = ['trackNumber','frameID', 'swath', 'direction', 'lookDirection', 'spacecraftName']
+    for key in wanted_slcp_keys:
+        met.update({key: master_slcp_met.get(key)})
+
+    met['master_slcp'] = os.path.basename(fn1)
+    met['slave_slcp'] = os.path.basename(fn2)
+    return met
 
 def get_vrt_met(prod_dir):
     '''
@@ -129,8 +145,11 @@ def parser():
     '''
     parse = argparse.ArgumentParser(description="Generate output COD met and dataset json")
     parse.add_argument("prod_dir", help="COD product directory path")
+    parse.add_argument("slcp_fn1", help="master SLCP path")
+    parse.add_argument("slcp_fn2", help="slave SLCP path")
+
     return parse
 
 if __name__ == '__main__':
     args = parser().parse_args()
-    main(args.prod_dir)
+    main(args.prod_dir, args.slcp_fn1, args.slcp_fn2)
