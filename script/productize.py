@@ -71,7 +71,7 @@ def parse_start_end_times(base):
     return times
 
 def create_met(base, fn1, fn2):
-    master_slcp_metfile = os.path.join(fn1, fn1 + '.met.json')
+    master_slcp_metfile = os.path.join(fn1, os.path.basename(fn1) + '.met.json')
     master_slcp_met = load_json(master_slcp_metfile)
     met = {}
     met.update(parse_start_end_times(base))
