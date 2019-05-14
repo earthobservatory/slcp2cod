@@ -34,8 +34,7 @@ def main(prod_dir, fn1, fn2):
     dataset['dataset'] = 'S1-COD'
     dataset['label'] = base
     #parse starttime/endtime from name
-    dataset.update(met['starttime'])
-    dataset.update(met['endtime'])
+    dataset.update({'starttime':met['starttime'], 'endtime':met['endtime']})
 
     #parse info from context
     try:
@@ -144,9 +143,9 @@ def parser():
     @return argparse parser
     '''
     parse = argparse.ArgumentParser(description="Generate output COD met and dataset json")
-    parse.add_argument("prod_dir", help="COD product directory path")
     parse.add_argument("slcp_fn1", help="master SLCP path")
     parse.add_argument("slcp_fn2", help="slave SLCP path")
+    parse.add_argument("prod_dir", help="COD product directory path")
 
     return parse
 
