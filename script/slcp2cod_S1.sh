@@ -26,17 +26,17 @@ cd ${outdir}
 #get range/azimuth looks
 nm=$(basename ${dir1})
 metf=${dir1}/${nm}.met.json
-#rlooks=$(cat ${metf} | grep -Po '(?<="range_looks": )(.*?)(?=,)')
-#azlooks=$(cat ${metf} | grep -Po '(?<="azimuth_looks": )(.*?)(?=,)')
+rlooks=$(cat ${metf} | grep -Po '(?<="range_looks": )(.*?)(?=,)')
+azlooks=$(cat ${metf} | grep -Po '(?<="azimuth_looks": )(.*?)(?=,)')
 # range looks dependent on subswath
-azlooks=2
-if [ "${i}" -eq "1" ]; then
-    rlooks=7 #subswath 1
-elif [ "${i}" -eq "2" ]; then
-    rlooks=8 #subswath 2
-else
-    rlooks=9 #subswath 3
-fi
+#azlooks=2
+#if [ "${i}" -eq "1" ]; then
+#    rlooks=7 #subswath 1
+#elif [ "${i}" -eq "2" ]; then
+#    rlooks=8 #subswath 2
+#else
+#    rlooks=9 #subswath 3
+#fi
 
 
 
