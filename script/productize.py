@@ -73,7 +73,7 @@ def parse_start_end_times(base):
 
 def create_met(base, fn1, fn2):
     master_slcp_metfile = os.path.join(fn1, fn1 + '.met.json')
-    master_slcp_met = load_file(master_slcp_metfile)
+    master_slcp_met = load_json(master_slcp_metfile)
     met = {}
     met.update(parse_start_end_times(base))
     wanted_slcp_keys = ['trackNumber','frameID', 'swath', 'direction', 'lookDirection', 'spacecraftName']
