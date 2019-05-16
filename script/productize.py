@@ -14,18 +14,18 @@ from shapely.geometry import Polygon, MultiPolygon, mapping
 from shapely.ops import cascaded_union
 from dateutil.parser import parse as dtparse
 
-def main(prod_dir, fn1, fn2):
+def main(prod_dir, fn1, fn2, rlooks, azlooks):
     #exit if there are no products
     if len(os.listdir(prod_dir)) == 0:
         print('Found no products available for publish in workdir: {}'.format(prod_dir))
         raise Exception('No COD products were generated.')
     base = os.path.basename(prod_dir)
-    met = create_met(base, fn1, fn2)
+    met = create_met(base, fn1, fn2, rlooks, azlooks)
     dataset = {}
     dataset_path = os.path.join(prod_dir, '{0}.dataset.json'.format(base))
     met_path = os.path.join(prod_dir, '{0}.met.json'.format(base))
     #get vars
-    dataset['version'] = 'v1.0'
+    dataset['version'] = 'v1.1'
     #try:
     dataset['location'] = get_location(prod_dir)
     #except:
@@ -70,7 +70,7 @@ def parse_start_end_times(base):
     times['sharedtime'] = mid
     return times
 
-def create_met(base, fn1, fn2):
+def create_met(base, fn1, fn2, rlooks, azlooks):
     master_slcp_metfile = os.path.join(fn1, os.path.basename(fn1) + '.met.json')
     master_slcp_met = load_json(master_slcp_metfile)
     met = {}
@@ -81,6 +81,8 @@ def create_met(base, fn1, fn2):
 
     met['master_slcp'] = os.path.basename(fn1)
     met['slave_slcp'] = os.path.basename(fn2)
+    met['range_looks'] = int(rlooks)
+    met['azimuth_looks'] = int(azlooks)
     return met
 
 def get_vrt_met(prod_dir):
@@ -146,9 +148,11 @@ def parser():
     parse.add_argument("slcp_fn1", help="master SLCP path")
     parse.add_argument("slcp_fn2", help="slave SLCP path")
     parse.add_argument("prod_dir", help="COD product directory path")
+    parse.add_argument("rlooks", help="range looks used")
+    parse.add_argument("azlooks", help="azimuth looks used")
 
     return parse
 
 if __name__ == '__main__':
     args = parser().parse_args()
-    main(args.prod_dir, args.slcp_fn1, args.slcp_fn2)
+    main(args.prod_dir, args.slcp_fn1, args.slcp_fn2, args.rlooks, args.azlooks)

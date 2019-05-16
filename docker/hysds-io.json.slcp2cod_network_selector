@@ -13,7 +13,7 @@
       "name": "project",
       "from": "submitter",
       "type": "enum",
-      "enumerables": ["grfn", "ariamh", "urgent-response", "mem"]
+      "enumerables": ["grfn", "ariamh", "change_detection","urgent-response","volcano", "mem"]
     },
     { 
       "name": "slcp_version",
@@ -24,6 +24,28 @@
       "name": "aoi_name",
       "from": "submitter",
       "type": "text"
+    },
+    {
+      "name": "track_number",
+      "from": "submitter",
+      "type": "text",
+      "optional": true,
+      "placeholder": "(optional) specify track number to be queried"
+    },
+    {
+      "name": "overriding_azimuth_looks",
+      "from": "submitter",
+      "type": "text",
+      "optional": true,
+      "placeholder": "(optional) comma sep. looks across subswaths e.g. 2,2,2"
+    },
+    {
+      "name": "overriding_range_looks",
+      "from": "submitter",
+      "type": "text",
+      "optional": true,
+      "placeholder": "(optional) comma sep. looks across subswaths e.g. 7,8,9"
+
     },
     {
       "name": "minmatch",

@@ -28,11 +28,14 @@ source ${parent_dir}/set_env_variable.sh
 #get subswath
 subswath=$(grep -o "[1-3]" <<< $(grep -o "_s[1-3]-" <<< ${fn1}))
 
+rlooks=$(${script_dir}/get_looks.py ${fn1} 'rn')
+azlooks=$(${script_dir}/get_looks.py ${fn1} 'az')
+
 #run cod script
-${script_dir}/slcp2cod_S1.sh ${fn1} ${fn2} ${fout}
+${script_dir}/slcp2cod_S1.sh ${fn1} ${fn2} ${fout} ${rlooks} ${azlooks}
 
 #productize
-${script_dir}/productize.py ${fn1} ${fn2} ${fout}
+${script_dir}/productize.py ${fn1} ${fn2} ${fout} ${rlooks} ${azlooks}
 
 #remove old dirs
 rm -rf ${fn1}
