@@ -35,6 +35,7 @@ def main(slcp_version, aoi_name, dataset_tag=None, project=None, queue=None, pri
     coords = aoi_dict['location']['coordinates']
     aoi_event_time = get_event_time(aoi_dict)
     aoi_event_dt = parser.parse(aoi_event_time)
+    ctx = load_context()
     try:
         aoi_start_time = parser.parse(walk(aoi_dict, 'starttime')).replace(tzinfo=pytz.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     except:
@@ -53,25 +54,47 @@ def main(slcp_version, aoi_name, dataset_tag=None, project=None, queue=None, pri
     template['query']['filtered']['query']['bool']['should'][1]['range']['endtime']['from'] = aoi_start_time
     template['query']['filtered']['query']['bool']['should'][1]['range']['endtime']['to'] = aoi_end_time
     template['query']['filtered']['filter']['geo_shape']['location']['shape']['coordinates'] = coords
+    if ctx['track_number']:
+        template['query']['filtered']['query']['bool']['must'].append({"term": {"metadata.trackNumber": ctx['track_number']}})
     #determine grq index
     index = 'grq_{0}_s1-slcp'.format(slcp_version)
     #run query for slcp products covering the aoi
     results = search(endpoint='grq', params=template, index=index)
-    ctx = load_context()
     minmatch = 0
     if 'minmatch' in ctx.keys():
         minmatch = int(ctx['minmatch'])
     min_overlap = 0.0
     if 'min_overlap' in ctx.keys():
         min_overlap = float(ctx['min_overlap'])
+
+    if ctx['overriding_azimuth_looks']:
+        azimuth_lks = [x.strip() for x in ctx['overriding_azimuth_looks'].split(",")];
+        if len(azimuth_lks) < 3:
+            azimuth_lks = None
+    else:
+        azimuth_lks = None
+
+    if ctx['overriding_range_looks']:
+        range_lks = [x.strip() for x in ctx['overriding_range_looks'].split(",")];
+        if len(range_lks) < 3:
+            range_lks = None
+    else:
+        range_lks = None
+
     #print('slcp results: {0}'.format(results))
-    url_pairs = determine_valid_pairs(results, aoi_event_dt, minmatch, min_overlap)
-    if len(url_pairs) > 0:
+    valid_pairs = determine_valid_pairs(results, aoi_event_dt, minmatch, min_overlap)
+
+    if len(valid_pairs) > 0:
         print('submitting COD jobs...')
     else:
         print('no COD jobs to submit.')
-    for pair in url_pairs:
-        submit_cod_job(pair, aoi_name, dataset_tag, project, queue, priority)
+
+    for x in valid_pairs:
+        url_list = (x[0]['url'], x[1]['url'])
+        swath = int(x[1]['swath'])
+        az_lk = azimuth_lks[swath-1] if azimuth_lks else ""
+        rn_lk = range_lks[swath-1] if range_lks else ""
+        submit_cod_job(url_list, aoi_name, dataset_tag, project, queue, priority, az_lk, rn_lk)
 
 def load_context():
     '''loads context from the workdir'''
@@ -157,9 +180,8 @@ def determine_valid_pairs(slcp_dict, event_dt, minmatch, min_overlap):
     else:
         print('Not using minmatch, submitting all SLCP pairs.')
     print('Submitting {0} COD jobs for matching SLCP pairs'.format(len(valid_pairs)))
-    [print('{} : {} frame:{} track: {}, swath: {} baseline: {}'.format(x[0]['uid'], x[1]['uid'], x[1]['track'], x[1]['frame'], x[1]['swath'], x[1]['baseline'])) for x in valid_pairs] 
-    url_list = [ (x[0]['url'], x[1]['url']) for x in valid_pairs ]
-    return url_list
+    [print('{} : {} frame:{} track: {}, swath: {} baseline: {}'.format(x[0]['uid'], x[1]['uid'], x[1]['track'], x[1]['frame'], x[1]['swath'], x[1]['baseline'])) for x in valid_pairs]
+    return valid_pairs
 
 def build_slcp_struct(slcp):
     '''builds a structure of relevant metadata per slcp & returns it as a dict'''
@@ -246,7 +268,7 @@ def get_url(slcp_obj):
     url_list = slcp_obj['_source']['urls']
     return filter(lambda x: x.startswith('s3'), url_list)[0]
 
-def submit_cod_job(url_pair, aoi_name, dataset_tag, project, queue, priority):
+def submit_cod_job(url_pair, aoi_name, dataset_tag, project, queue, priority, az_lk=None, rn_lk=None):
     '''
     Submits job for COD creation
     '''
@@ -268,8 +290,11 @@ def submit_cod_job(url_pair, aoi_name, dataset_tag, project, queue, priority):
     job_params = [{'name': 'dataset_tag', 'from': 'value', 'value': dataset_tag},
                   {'name': 'project', 'from': 'value', 'value': project}, 
                   {'name': 'url1', 'from': 'value', 'value': url1},
-                  {'name': 'url2', 'from': 'value', 'value': url2}
-                 ]
+                  {'name': 'url2', 'from': 'value', 'value': url2},
+                  {'name': 'overriding_azimuth_looks', 'from': 'value', 'value': az_lk},
+                  {'name': 'overriding_range_looks', 'from': 'value', 'value': rn_lk}
+                  ]
+
     job_name = 'slcp2cod_{}_{}_{}'.format(aoi_name, os.path.basename(url1), os.path.basename(url2))
     if len(job_name) > 200:
         job_name = 'slcp2cod_{}_{}'.format(aoi_name, hashlib.sha224(job_name).hexdigest()) #TEMP FIX

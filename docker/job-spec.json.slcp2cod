@@ -27,6 +27,14 @@
     { 
       "name": "url2",
       "destination": "localize"
+    },
+    {
+      "name": "overriding_azimuth_looks",
+      "destination": "context"
+    },
+    {
+      "name": "overriding_range_looks",
+      "destination": "context"
     }
   ]
 }

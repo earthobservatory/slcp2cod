@@ -29,6 +29,18 @@
       "destination": "positional"
     },
     {
+      "name": "track_number",
+      "destination": "context"
+    },
+    {
+      "name": "overriding_azimuth_looks",
+      "destination": "context"
+    },
+    {
+      "name": "overriding_range_looks",
+      "destination": "context"
+    },
+    {
       "name": "minmatch",
       "destination": "context"
     },
