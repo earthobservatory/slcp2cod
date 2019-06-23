@@ -34,19 +34,19 @@
       "placeholder": "(optional) specify track number to be queried"
     },
     {
-      "name": "overriding_azimuth_looks",
-      "from": "submitter",
-      "type": "text",
-      "optional": true,
-      "placeholder": "(optional) comma sep. looks across subswaths e.g. 2,2,2"
-    },
-    {
       "name": "overriding_range_looks",
       "from": "submitter",
       "type": "text",
       "optional": true,
       "placeholder": "(optional) comma sep. looks across subswaths e.g. 7,8,9"
 
+    },
+    {
+      "name": "overriding_azimuth_looks",
+      "from": "submitter",
+      "type": "text",
+      "optional": true,
+      "placeholder": "(optional) comma sep. looks across subswaths e.g. 2,2,2"
     },
     {
       "name": "minmatch",

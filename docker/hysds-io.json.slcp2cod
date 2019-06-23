@@ -26,19 +26,19 @@
       "type": "text"
     },
     {
-      "name": "overriding_azimuth_looks",
-      "from": "submitter",
-      "type": "text",
-      "optional": true,
-      "placeholder": "(optional) azimuth looks to override SLCP"
-    },
-    {
       "name": "overriding_range_looks",
       "from": "submitter",
       "type": "text",
       "optional": true,
       "placeholder": "(optional) range looks to override SLCP"
 
+    },
+    {
+      "name": "overriding_azimuth_looks",
+      "from": "submitter",
+      "type": "text",
+      "optional": true,
+      "placeholder": "(optional) azimuth looks to override SLCP"
     }
   ]
 }
