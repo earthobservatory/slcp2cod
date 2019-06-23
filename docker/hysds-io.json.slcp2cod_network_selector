@@ -18,7 +18,8 @@
     { 
       "name": "slcp_version",
       "from": "submitter",
-      "type": "text"
+      "type": "text",
+      "default": "v1.3"
     },
     { 
       "name": "aoi_name",
