@@ -19,7 +19,7 @@
       "name": "slcp_version",
       "from": "submitter",
       "type": "text",
-      "default": "v1.3"
+      "default": "v1.2"
     },
     { 
       "name": "aoi_name",
