@@ -126,7 +126,7 @@ def get_location(prod_dir):
         metfile = [dirc for dirc in filelist if re.match(r'(S1-SLCP).*(.dataset.json)', dirc)]
         for metf in metfile:
             dset = load_json(os.path.join(slcpdir, metf))
-            if 'location' in dset.keys() and 'coordinates' in dset['location'].keys():
+            if 'location' in list(dset.keys()) and 'coordinates' in list(dset['location'].keys()):
                 shape_extent = Polygon(dset['location']['coordinates'][0])
                 polygons.append(shape_extent)
     multi = MultiPolygon(polygons)

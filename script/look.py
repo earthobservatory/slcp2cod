@@ -3,6 +3,8 @@
 #Cunren Liang, JPL/Caltech
 
 
+from __future__ import division
+from past.utils import old_div
 import os
 import sys
 import argparse
@@ -62,8 +64,8 @@ def ampLooks(inps):
 
     inWidth = getWidth(inps.input + '.xml')
     inLength = getLength(inps.input + '.xml')
-    outWidth = int(inWidth/inps.rlks)
-    outLength = int(inLength/inps.alks)
+    outWidth = int(old_div(inWidth,inps.rlks))
+    outLength = int(old_div(inLength,inps.alks))
 
     #run it
     #cmd = 'echo -e "{}\n{}\n{} {}\n{} {}\n" | $INSAR_ZERODOP_BIN/rilooks'.format(inps.input, inps.output, inWidth, inLength, inps.rlks, inps.alks)
@@ -86,8 +88,8 @@ def intLooks(inps):
 
     inWidth = getWidth(inps.input + '.xml')
     inLength = getLength(inps.input + '.xml')
-    outWidth = int(inWidth/inps.rlks)
-    outLength = int(inLength/inps.alks)
+    outWidth = int(old_div(inWidth,inps.rlks))
+    outLength = int(old_div(inLength,inps.alks))
 
     #run program here
     cmd = 'echo "{}\n{}\n{} {}\n{} {}\n" | $INSAR_ZERODOP_BIN/cpxlooks'.format(inps.input, inps.output, inWidth, inLength, inps.rlks, inps.alks)
@@ -109,8 +111,8 @@ def mskLooks(inps):
 
     inWidth = getWidth(inps.input + '.xml')
     inLength = getLength(inps.input + '.xml')
-    outWidth = int(inWidth/inps.rlks)
-    outLength = int(inLength/inps.alks)
+    outWidth = int(old_div(inWidth,inps.rlks))
+    outLength = int(old_div(inLength,inps.alks))
 
     #look_msk infile outfile nrg nrlks nalks
     #run program here
@@ -136,8 +138,8 @@ def hgtLooks(inps):
 
     inWidth = getWidth(inps.input + '.xml')
     inLength = getLength(inps.input + '.xml')
-    outWidth = int(inWidth/inps.rlks)
-    outLength = int(inLength/inps.alks)
+    outWidth = int(old_div(inWidth,inps.rlks))
+    outLength = int(old_div(inLength,inps.alks))
 
     #look_msk infile outfile nrg nrlks nalks
     #run program here

@@ -4,6 +4,9 @@ Queries ElasticSearch for SLCPs over and AOI, builds list of SLCP pairs, & Submi
 '''
 
 from __future__ import print_function
+from __future__ import division
+from builtins import str
+from past.utils import old_div
 import sys
 import os
 import json
@@ -61,10 +64,10 @@ def main(slcp_version, aoi_name, dataset_tag=None, project=None, queue=None, pri
     #run query for slcp products covering the aoi
     results = search(endpoint='grq', params=template, index=index)
     minmatch = 0
-    if 'minmatch' in ctx.keys():
+    if 'minmatch' in list(ctx.keys()):
         minmatch = int(ctx['minmatch'])
     min_overlap = 0.0
-    if 'min_overlap' in ctx.keys():
+    if 'min_overlap' in list(ctx.keys()):
         min_overlap = float(ctx['min_overlap'])
 
     if ctx['overriding_azimuth_looks']:
@@ -112,7 +115,7 @@ def get_event_time(aoi_dict):
     '''determines the event time from the aoi dict and returns it as a datetime'''
     for item in ['event_time', 'eventtime', 'event']:
         event_time = walk(aoi_dict, item)
-        if item == 'event' and type(event_time) is dict and 'time' in event_time.keys():
+        if item == 'event' and type(event_time) is dict and 'time' in list(event_time.keys()):
             event_time = event_time['time'] # handle the ['event']['time'] case
         if event_time:
             return parser.parse(event_time).replace(tzinfo=pytz.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -121,7 +124,7 @@ def get_event_time(aoi_dict):
 def walk(node, key_match):
     '''recursive node walk, returns None if nothing found, returns the value if a key matches key_match'''
     if isinstance(node, dict):
-        for key, item in node.items():
+        for key, item in list(node.items()):
             if str(key) == str(key_match):
                 return item
             result = walk(item, key_match)
@@ -208,12 +211,12 @@ def minmatch_filter(valid_pairs, minmatch):
         swath = item[1]['swath']
         #baseline = item[1]['baseline']
         key = '{}_{}_{}'.format(track,frame,swath)
-        if not key in submission_pairs.keys():
+        if not key in list(submission_pairs.keys()):
             submission_pairs[key] = [item]
         else:
             submission_pairs[key].append(item) 
     valid_pairs = []
-    for key in submission_pairs.keys():
+    for key in list(submission_pairs.keys()):
          valid_list = sorted(submission_pairs[key], key = lambda x: x[0]['baseline'])
          valid_list = valid_list[:minmatch]
          valid_pairs.extend(valid_list)
@@ -250,7 +253,7 @@ def get_overlap(pre_slcp, co_slcp):
         overlap = max_co_slcp - min_pre_slcp
     length = max_co_slcp - min_co_slcp
     #print('length is {} and mins are: {} {}'.format(length, min_pre_slcp, min_co_slcp))
-    return overlap / length
+    return old_div(overlap, length)
 
 
 def get_start_end_datetimes(slcp_obj):
@@ -266,7 +269,7 @@ def get_url(slcp_obj):
     gets the s3 url for the slcp
     '''
     url_list = slcp_obj['_source']['urls']
-    return filter(lambda x: x.startswith('s3'), url_list)[0]
+    return [x for x in url_list if x.startswith('s3')][0]
 
 def submit_cod_job(url_pair, aoi_name, dataset_tag, project, queue, priority, az_lk=None, rn_lk=None):
     '''

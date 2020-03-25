@@ -35,9 +35,9 @@ def main(fn1, fn2):
     dtag = 'urgent_response'
     version = 'v1.0'
     ctx = load_context()
-    if 'dataset_tag' in ctx.keys():
+    if 'dataset_tag' in list(ctx.keys()):
         dtag = ctx['dataset_tag']
-    if 'version' in ctx.keys():
+    if 'version' in list(ctx.keys()):
         version = ctx['version']
     metfile = os.path.join(fn1, fn1 + '.met.json')
     met = load_file(metfile)

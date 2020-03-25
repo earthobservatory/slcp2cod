@@ -2,6 +2,9 @@
 
 
 
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 import os
 import sys
 import glob
@@ -152,8 +155,8 @@ if __name__ == '__main__':
         width = getWidth(mbursts[i] + '.xml')
         length = getLength(mbursts[i] + '.xml')
 
-        width_looked = int(width/inps.rlks)
-        length_looked = int(length/inps.alks)
+        width_looked = int(old_div(width,inps.rlks))
+        length_looked = int(old_div(length,inps.alks))
 
         master = np.fromfile(mbursts[i], dtype=np.complex64).reshape(length, width)
         slave = np.fromfile(sbursts[i], dtype=np.complex64).reshape(length, width)
@@ -228,30 +231,30 @@ if __name__ == '__main__':
         amp_looked_data = np.fromfile(amp_looked, dtype=np.float32).reshape(length_looked, width_looked*2)
         m = amp_looked_data[:, 0:width_looked*2:2]
         s = amp_looked_data[:, 1:width_looked*2:2]
-        logr_looked_data = np.log10(       (m+(m==0))    /    (s+(s==0))        ) * (m!=0) * (s!=0)
+        logr_looked_data = np.log10(       old_div((m+(m==0)),    (s+(s==0)))        ) * (m!=0) * (s!=0)
 
         #remove white edges
         upper_edge = 0
         for k in range(length_looked):
-            if logr_looked_data[k, int(width_looked/2)] != 0:
+            if logr_looked_data[k, int(old_div(width_looked,2))] != 0:
                 upper_edge = k
                 break
 
         lower_edge = length_looked-1
         for k in range(length_looked):
-            if logr_looked_data[length_looked-1-k, int(width_looked/2)] != 0:
+            if logr_looked_data[length_looked-1-k, int(old_div(width_looked,2))] != 0:
                 lower_edge = length_looked-1-k
                 break
 
         left_edge = 0
         for k in range(width_looked):
-            if logr_looked_data[int(length_looked/2), k] != 0:
+            if logr_looked_data[int(old_div(length_looked,2)), k] != 0:
                 left_edge = k
                 break
 
         right_edge = width_looked-1
         for k in range(width_looked):
-            if logr_looked_data[int(length_looked/2), width_looked-1-k] != 0:
+            if logr_looked_data[int(old_div(length_looked,2)), width_looked-1-k] != 0:
                 right_edge = width_looked-1-k
                 break
 

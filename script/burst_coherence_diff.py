@@ -2,6 +2,9 @@
 
 
 
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 import os
 import sys
 import glob
@@ -165,8 +168,8 @@ if __name__ == '__main__':
         width = getWidth(mbursts[i] + '.xml')
         length = getLength(mbursts[i] + '.xml')
 
-        width_looked = int(width/inps.rlks)
-        length_looked = int(length/inps.alks)
+        width_looked = int(old_div(width,inps.rlks))
+        length_looked = int(old_div(length,inps.alks))
 
         master = np.fromfile(mbursts[i], dtype=np.complex64).reshape(length, width)
         slave = np.fromfile(os.path.join(inps.sdir, mslc), dtype=np.complex64).reshape(length, width)

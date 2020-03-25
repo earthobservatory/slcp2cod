@@ -91,7 +91,7 @@ def get_url(slcp_obj):
     gets the s3 url for the slcp
     '''
     url_list = slcp_obj['_source']['urls']
-    return filter(lambda x: x.startswith('s3'), url_list)[0]
+    return [x for x in url_list if x.startswith('s3')][0]
 
 
 
