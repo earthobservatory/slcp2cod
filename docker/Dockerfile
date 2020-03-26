@@ -1,4 +1,4 @@
-FROM hysds/pge-isce_giant:latest
+FROM container-aria-jpl_ariamh:python3
 
 MAINTAINER jlinick "Justin.P.Linick@jpl.nasa.gov"
 LABEL description="GRFN PGE container for COD product generation"
