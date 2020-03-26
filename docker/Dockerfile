@@ -15,7 +15,8 @@ RUN set -ex \
 USER root
 
 #install shapely
-RUN source /home/ops/verdi/bin/activate \ 
+RUN source /home/ops/verdi/bin/activate \
+    && source /home/ops/ariamh/isce.sh \ 
     && pip install shapely
 
 # copy code ensure proper permissions, and move dependencies to final locations
