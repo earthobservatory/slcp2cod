@@ -300,7 +300,7 @@ def submit_cod_job(url_pair, aoi_name, dataset_tag, project, queue, priority, az
 
     job_name = 'slcp2cod_{}_{}_{}'.format(aoi_name, os.path.basename(url1), os.path.basename(url2))
     if len(job_name) > 200:
-        job_name = 'slcp2cod_{}_{}'.format(aoi_name, hashlib.sha224(job_name).hexdigest()) #TEMP FIX
+        job_name = 'slcp2cod_{}_{}'.format(aoi_name, hashlib.sha224(job_name.encode('utf-8')).hexdigest()) #TEMP FIX
     job_spec = 'job-slcp2cod:{}'.format(job_version)
     dedup = True
     submit_job(job_name, job_spec, job_params, queue, priority=priority, dedup=dedup)
