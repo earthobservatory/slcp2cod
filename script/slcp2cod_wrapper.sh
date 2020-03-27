@@ -21,6 +21,9 @@ fout=$(${script_dir}/rename.py ${fn1_base} ${fn2_base})
 parent_dir=$(dirname ${script_dir})
 source ${parent_dir}/set_env_variable.sh
 
+# Set ISCE module
+source ~/ariamh/isce.sh
+
 #pull the first and second  dirs
 #aws s3 cp ${s31} ${fn1} --recursive
 #aws s3 cp ${s32} ${fn2} --recursive

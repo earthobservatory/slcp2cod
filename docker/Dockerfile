@@ -21,7 +21,6 @@ RUN source /home/ops/verdi/bin/activate \
 # copy code ensure proper permissions, and move dependencies to final locations
 COPY . /home/ops/verdi/ops/slcp2cod
 RUN set -ex \
-    && source /home/ops/ariamh/isce.sh \
     && sudo chown -R ops:ops /home/ops/verdi/ops/slcp2cod \
     && cd /home/ops/verdi/ops/slcp2cod/src \
     && ./compile.sh
