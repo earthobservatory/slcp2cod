@@ -15,13 +15,13 @@ RUN set -ex \
 USER root
 
 #install shapely
-RUN source /home/ops/verdi/bin/activate \
-    && source /home/ops/ariamh/isce.sh \ 
+RUN source /home/ops/verdi/bin/activate \ 
     && pip install shapely
 
 # copy code ensure proper permissions, and move dependencies to final locations
 COPY . /home/ops/verdi/ops/slcp2cod
 RUN set -ex \
+    && source /home/ops/ariamh/isce.sh \
     && sudo chown -R ops:ops /home/ops/verdi/ops/slcp2cod \
     && cd /home/ops/verdi/ops/slcp2cod/src \
     && ./compile.sh
