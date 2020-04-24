@@ -38,6 +38,7 @@
       "from": "submitter",
       "type": "text",
       "optional": true,
+      "default": "16,16,16",
       "placeholder": "(optional) comma sep. looks across subswaths e.g. 7,8,9"
 
     },
