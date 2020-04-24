@@ -41,5 +41,5 @@ cd ${outdir}
 #fi
 
 script_dir=`dirname ${0}`
-${script_dir}/burst_coherence_diff.py -mdir ${dirm} -sdir ${dirs1} -sdir2 ${dirs2} -gdir ${dirg} -rlks ${rlooks} -alks ${azlooks} -ssize 1.0 || true
+source /opt/isce2/isce_env.sh && ${script_dir}/burst_coherence_diff.py -mdir ${dirm} -sdir ${dirs1} -sdir2 ${dirs2} -gdir ${dirg} -rlks ${rlooks} -alks ${azlooks} -ssize 1.0 || true
 cd ..

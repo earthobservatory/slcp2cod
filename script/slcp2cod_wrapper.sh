@@ -22,7 +22,7 @@ parent_dir=$(dirname ${script_dir})
 source ${parent_dir}/set_env_variable.sh
 
 # Set ISCE module
-source ~/ariamh/isce.sh
+source /opt/isce2/isce_env.sh
 
 #pull the first and second  dirs
 #aws s3 cp ${s31} ${fn1} --recursive
@@ -38,7 +38,7 @@ azlooks=$(${script_dir}/get_looks.py ${fn1} 'az')
 ${script_dir}/slcp2cod_S1.sh ${fn1} ${fn2} ${fout} ${rlooks} ${azlooks}
 
 #productize
-${script_dir}/productize.py ${fn1} ${fn2} ${fout} ${rlooks} ${azlooks}
+source /opt/isce2/isce_env.sh && ${script_dir}/productize.py ${fn1} ${fn2} ${fout} ${rlooks} ${azlooks}
 
 #remove old dirs
 rm -rf ${fn1}
