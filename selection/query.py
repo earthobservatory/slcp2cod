@@ -15,6 +15,7 @@ import requests
 import argparse
 import pytz
 import hashlib
+import traceback
 from hysds.celery import app
 from dateutil import parser
 from datetime import timedelta
@@ -401,4 +402,16 @@ def argparser():
 
 if __name__ == '__main__':
     args = argparser().parse_args()
-    main(args.slcp_version, args.aoi_name, dataset_tag=args.dataset_tag, project=args.project, queue=args.queue, priority=args.priority)
+
+    try:
+        status = main(args.slcp_version, args.aoi_name, dataset_tag=args.dataset_tag, project=args.project, queue=args.queue, priority=args.priority)
+    except (Exception, SystemExit) as e:
+        with open('_alt_error.txt', 'w') as f:
+            f.write("%s\n" % str(e))
+        with open('_alt_traceback.txt', 'w') as f:
+            f.write("%s\n" % traceback.format_exc())
+        raise
+    sys.exit(status)
+
+
+

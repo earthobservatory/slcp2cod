@@ -16,7 +16,7 @@ import argparse
 import numpy as np
 import numpy.matlib
 from xml.etree.ElementTree import ElementTree
-
+import traceback
 import isce
 import isceobj
 from imageMath import IML
@@ -130,53 +130,51 @@ def cmdLineParse():
 
     return parser.parse_args()
 
-if __name__ == '__main__':
-
-    SCR_DIR="$INSAR_ZERODOP_SCR"
+def main():
+    SCR_DIR = "$INSAR_ZERODOP_SCR"
 
     inps = cmdLineParse()
 
     mbursts = sorted(glob.glob(os.path.join(inps.mdir, 'burst_*.slc')))
-    #sbursts = sorted(glob.glob(os.path.join(inps.sdir, 'burst_*.slc')))
-    #sbursts2 = sorted(glob.glob(os.path.join(inps.sdir2, 'burst_*.slc')))
+    # sbursts = sorted(glob.glob(os.path.join(inps.sdir, 'burst_*.slc')))
+    # sbursts2 = sorted(glob.glob(os.path.join(inps.sdir2, 'burst_*.slc')))
 
-    nmb = len(mbursts) #number of master bursts
-    #nsb = len(sbursts) #number of slave bursts
-    #nsb2 = len(sbursts2) #number of burst interferograms
+    nmb = len(mbursts)  # number of master bursts
+    # nsb = len(sbursts) #number of slave bursts
+    # nsb2 = len(sbursts2) #number of burst interferograms
 
-    #lats = sorted(glob.glob(os.path.join(inps.gdir, 'lat_*.rdr')))
-    #lons = sorted(glob.glob(os.path.join(inps.gdir, 'lon_*.rdr')))
+    # lats = sorted(glob.glob(os.path.join(inps.gdir, 'lat_*.rdr')))
+    # lons = sorted(glob.glob(os.path.join(inps.gdir, 'lon_*.rdr')))
 
-
-    #if nmb != nsb:
+    # if nmb != nsb:
     #    raise Exception('nmb != nsb\n')
-    #if nmb != nsb2:
+    # if nmb != nsb2:
     #    raise Exception('nmb != nsb2\n')
 
     nb = nmb
 
     for i in range(nb):
         print('+++++++++++++++++++++++++++++++++++')
-        print('processing burst {} of {}'.format(i+1, nb))
+        print('processing burst {} of {}'.format(i + 1, nb))
         print('+++++++++++++++++++++++++++++++++++')
 
         mslc = ntpath.basename(mbursts[i])
-        if os.path.isfile(os.path.join(inps.sdir, mslc)) == False or os.path.isfile(os.path.join(inps.sdir2, mslc)) == False:
+        if os.path.isfile(os.path.join(inps.sdir, mslc)) == False or os.path.isfile(
+                os.path.join(inps.sdir2, mslc)) == False:
             print('skipping this burst')
             continue
 
         width = getWidth(mbursts[i] + '.xml')
         length = getLength(mbursts[i] + '.xml')
 
-        width_looked = int(old_div(width,inps.rlks))
-        length_looked = int(old_div(length,inps.alks))
+        width_looked = int(old_div(width, inps.rlks))
+        length_looked = int(old_div(length, inps.alks))
 
         master = np.fromfile(mbursts[i], dtype=np.complex64).reshape(length, width)
         slave = np.fromfile(os.path.join(inps.sdir, mslc), dtype=np.complex64).reshape(length, width)
         slave2 = np.fromfile(os.path.join(inps.sdir2, mslc), dtype=np.complex64).reshape(length, width)
         inf = master * np.conj(slave)
         inf2 = master * np.conj(slave2)
-
 
         interferogram = 'inf.int'
         inf.astype(np.complex64).tofile(interferogram)
@@ -186,49 +184,47 @@ if __name__ == '__main__':
         inf2.astype(np.complex64).tofile(interferogram2)
         create_xml(interferogram2, width, length, 'int')
 
-        amp = 'amp_%02d.amp' % (i+1)
+        amp = 'amp_%02d.amp' % (i + 1)
         create_amp(width, length, master, slave, amp)
 
-        amp2 = 'amp2_%02d.amp' % (i+1)
+        amp2 = 'amp2_%02d.amp' % (i + 1)
         create_amp(width, length, master, slave2, amp2)
 
-        amp_looked = 'amp_%02d_%drlks_%dalks.amp' % (i+1,inps.rlks,inps.alks)
+        amp_looked = 'amp_%02d_%drlks_%dalks.amp' % (i + 1, inps.rlks, inps.alks)
         cmd = "{}/look.py -i {} -o {} -r {} -a {}".format(SCR_DIR,
-            amp, 
-            amp_looked,
-            inps.rlks,
-            inps.alks)
+                                                          amp,
+                                                          amp_looked,
+                                                          inps.rlks,
+                                                          inps.alks)
         runCmd(cmd)
 
-        amp_looked2 = 'amp2_%02d_%drlks_%dalks.amp' % (i+1,inps.rlks,inps.alks)
+        amp_looked2 = 'amp2_%02d_%drlks_%dalks.amp' % (i + 1, inps.rlks, inps.alks)
         cmd = "{}/look.py -i {} -o {} -r {} -a {}".format(SCR_DIR,
-            amp2, 
-            amp_looked2,
-            inps.rlks,
-            inps.alks)
+                                                          amp2,
+                                                          amp_looked2,
+                                                          inps.rlks,
+                                                          inps.alks)
         runCmd(cmd)
 
-
-        interferogram_looked = 'inf_%02d_%drlks_%dalks.amp' % (i+1,inps.rlks,inps.alks)
+        interferogram_looked = 'inf_%02d_%drlks_%dalks.amp' % (i + 1, inps.rlks, inps.alks)
         cmd = "{}/look.py -i {} -o {} -r {} -a {}".format(SCR_DIR,
-            interferogram, 
-            interferogram_looked,
-            inps.rlks,
-            inps.alks)
+                                                          interferogram,
+                                                          interferogram_looked,
+                                                          inps.rlks,
+                                                          inps.alks)
         runCmd(cmd)
 
-        interferogram_looked2 = 'inf2_%02d_%drlks_%dalks.amp' % (i+1,inps.rlks,inps.alks)
+        interferogram_looked2 = 'inf2_%02d_%drlks_%dalks.amp' % (i + 1, inps.rlks, inps.alks)
         cmd = "{}/look.py -i {} -o {} -r {} -a {}".format(SCR_DIR,
-            interferogram2, 
-            interferogram_looked2,
-            inps.rlks,
-            inps.alks)
+                                                          interferogram2,
+                                                          interferogram_looked2,
+                                                          inps.rlks,
+                                                          inps.alks)
         runCmd(cmd)
 
-
-        cor_looked = 'cor_%02d_%drlks_%dalks.cor' % (i+1,inps.rlks,inps.alks)
-        #cmd = "{}/coherence.py -i {} -a {} -c {}".format(SCR_DIR,
-        #    interferogram_looked, 
+        cor_looked = 'cor_%02d_%drlks_%dalks.cor' % (i + 1, inps.rlks, inps.alks)
+        # cmd = "{}/coherence.py -i {} -a {} -c {}".format(SCR_DIR,
+        #    interferogram_looked,
         #    amp_looked,
         #    cor_looked)
         cmd = "imageMath.py -e='sqrt(b_0*b_0+b_1*b_1)*(abs(a)!=0)*(b_0!=0)*(b_1!=0);abs(a)/(b_0*b_1+(b_0*b_1==0))*(abs(a)!=0)*(b_0!=0)*(b_1!=0)' --a={} --b={} -o {} -t float -s BIL".format(
@@ -237,9 +233,9 @@ if __name__ == '__main__':
             cor_looked)
         runCmd(cmd)
 
-        cor_looked2 = 'cor2_%02d_%drlks_%dalks.cor' % (i+1,inps.rlks,inps.alks)
-        #cmd = "{}/coherence.py -i {} -a {} -c {}".format(SCR_DIR,
-        #    interferogram_looked2, 
+        cor_looked2 = 'cor2_%02d_%drlks_%dalks.cor' % (i + 1, inps.rlks, inps.alks)
+        # cmd = "{}/coherence.py -i {} -a {} -c {}".format(SCR_DIR,
+        #    interferogram_looked2,
         #    amp_looked2,
         #    cor_looked2)
         cmd = "imageMath.py -e='sqrt(b_0*b_0+b_1*b_1)*(abs(a)!=0)*(b_0!=0)*(b_1!=0);abs(a)/(b_0*b_1+(b_0*b_1==0))*(abs(a)!=0)*(b_0!=0)*(b_1!=0)' --a={} --b={} -o {} -t float -s BIL".format(
@@ -248,32 +244,34 @@ if __name__ == '__main__':
             cor_looked2)
         runCmd(cmd)
 
-        cor_diff_looked = 'diff_cor_%02d_%drlks_%dalks.cor' % (i+1,inps.rlks,inps.alks)
-        cor_amp = (np.fromfile(cor_looked, dtype=np.float32).reshape(length_looked*2, width_looked))[0:length_looked*2:2, :]
-        cor = (np.fromfile(cor_looked, dtype=np.float32).reshape(length_looked*2, width_looked))[1:length_looked*2:2, :]
-        cor2 = (np.fromfile(cor_looked2, dtype=np.float32).reshape(length_looked*2, width_looked))[1:length_looked*2:2, :]
+        cor_diff_looked = 'diff_cor_%02d_%drlks_%dalks.cor' % (i + 1, inps.rlks, inps.alks)
+        cor_amp = (np.fromfile(cor_looked, dtype=np.float32).reshape(length_looked * 2, width_looked))[
+                  0:length_looked * 2:2, :]
+        cor = (np.fromfile(cor_looked, dtype=np.float32).reshape(length_looked * 2, width_looked))[
+              1:length_looked * 2:2, :]
+        cor2 = (np.fromfile(cor_looked2, dtype=np.float32).reshape(length_looked * 2, width_looked))[
+               1:length_looked * 2:2, :]
 
-        cor_diff = np.zeros((length_looked*2, width_looked))
-        cor_diff[0:length_looked*2:2, :] = cor_amp * (cor_amp!=0) * (cor!=0) * (cor2!=0)
-        cor_diff[1:length_looked*2:2, :] = (cor-cor2) * (cor_amp!=0) * (cor!=0) * (cor2!=0)
+        cor_diff = np.zeros((length_looked * 2, width_looked))
+        cor_diff[0:length_looked * 2:2, :] = cor_amp * (cor_amp != 0) * (cor != 0) * (cor2 != 0)
+        cor_diff[1:length_looked * 2:2, :] = (cor - cor2) * (cor_amp != 0) * (cor != 0) * (cor2 != 0)
         cor_diff.astype(np.float32).tofile(cor_diff_looked)
         create_xml(cor_diff_looked, width_looked, length_looked, 'rmg')
 
-
-        lat_looked = 'lat_%02d_%drlks_%dalks.rdr' % (i+1,inps.rlks,inps.alks)
+        lat_looked = 'lat_%02d_%drlks_%dalks.rdr' % (i + 1, inps.rlks, inps.alks)
         cmd = "{}/look.py -i {} -o {} -r {} -a {}".format(SCR_DIR,
-            os.path.join(inps.gdir, 'lat_%02d.rdr' % (i+1)), 
-            lat_looked,
-            inps.rlks,
-            inps.alks)
+                                                          os.path.join(inps.gdir, 'lat_%02d.rdr' % (i + 1)),
+                                                          lat_looked,
+                                                          inps.rlks,
+                                                          inps.alks)
         runCmd(cmd)
 
-        lon_looked = 'lon_%02d_%drlks_%dalks.rdr' % (i+1,inps.rlks,inps.alks)
+        lon_looked = 'lon_%02d_%drlks_%dalks.rdr' % (i + 1, inps.rlks, inps.alks)
         cmd = "{}/look.py -i {} -o {} -r {} -a {}".format(SCR_DIR,
-            os.path.join(inps.gdir, 'lon_%02d.rdr' % (i+1)), 
-            lon_looked,
-            inps.rlks,
-            inps.alks)
+                                                          os.path.join(inps.gdir, 'lon_%02d.rdr' % (i + 1)),
+                                                          lon_looked,
+                                                          inps.rlks,
+                                                          inps.alks)
         runCmd(cmd)
 
         lat_looked_data = np.fromfile(lat_looked, dtype=np.float64).reshape(length_looked, width_looked)
@@ -286,10 +284,10 @@ if __name__ == '__main__':
         bbox = [lat_min, lat_max, lon_min, lon_max]
 
         script_dir = os.path.dirname(os.path.realpath(__file__))
-        cor_diff_looked_geo = 'diff_cor_%02d_%drlks_%dalks.cor.geo' % (i+1,inps.rlks,inps.alks)
+        cor_diff_looked_geo = 'diff_cor_%02d_%drlks_%dalks.cor.geo' % (i + 1, inps.rlks, inps.alks)
         cmd = "{}/geo_with_ll.py -input {} -output {} -lat {} -lon {} -bbox \"{}\" -ssize {} -rmethod {}".format(
             script_dir,
-            cor_diff_looked, 
+            cor_diff_looked,
             cor_diff_looked_geo,
             lat_looked,
             lon_looked,
@@ -297,7 +295,6 @@ if __name__ == '__main__':
             inps.ssize,
             1)
         runCmd(cmd)
-
 
         os.remove(interferogram)
         os.remove(interferogram2)
@@ -307,41 +304,52 @@ if __name__ == '__main__':
         os.remove(amp_looked2)
         os.remove(interferogram_looked)
         os.remove(interferogram_looked2)
-        #os.remove(cor_looked)
-        #os.remove(cor_looked2)
-        #os.remove(cor_diff_looked)
+        # os.remove(cor_looked)
+        # os.remove(cor_looked2)
+        # os.remove(cor_diff_looked)
         os.remove(lat_looked)
         os.remove(lon_looked)
 
+        os.remove(interferogram + '.xml')
+        os.remove(interferogram2 + '.xml')
+        os.remove(amp + '.xml')
+        os.remove(amp2 + '.xml')
+        os.remove(amp_looked + '.xml')
+        os.remove(amp_looked2 + '.xml')
+        os.remove(interferogram_looked + '.xml')
+        os.remove(interferogram_looked2 + '.xml')
+        # os.remove(cor_looked+'.xml')
+        # os.remove(cor_looked2+'.xml')
+        # os.remove(cor_diff_looked+'.xml')
+        os.remove(lat_looked + '.xml')
+        os.remove(lon_looked + '.xml')
 
-        os.remove(interferogram+'.xml')
-        os.remove(interferogram2+'.xml')
-        os.remove(amp+'.xml')
-        os.remove(amp2+'.xml')
-        os.remove(amp_looked+'.xml')
-        os.remove(amp_looked2+'.xml')
-        os.remove(interferogram_looked+'.xml')
-        os.remove(interferogram_looked2+'.xml')
-        #os.remove(cor_looked+'.xml')
-        #os.remove(cor_looked2+'.xml')
-        #os.remove(cor_diff_looked+'.xml')
-        os.remove(lat_looked+'.xml')
-        os.remove(lon_looked+'.xml')
+        os.remove(interferogram + '.vrt')
+        os.remove(interferogram2 + '.vrt')
+        os.remove(amp + '.vrt')
+        os.remove(amp2 + '.vrt')
+        os.remove(amp_looked + '.vrt')
+        os.remove(amp_looked2 + '.vrt')
+        os.remove(interferogram_looked + '.vrt')
+        os.remove(interferogram_looked2 + '.vrt')
+        # os.remove(cor_looked+'.vrt')
+        # os.remove(cor_looked2+'.vrt')
+        # os.remove(cor_diff_looked+'.vrt')
+        os.remove(lat_looked + '.vrt')
+        os.remove(lon_looked + '.vrt')
 
 
-        os.remove(interferogram+'.vrt')
-        os.remove(interferogram2+'.vrt')
-        os.remove(amp+'.vrt')
-        os.remove(amp2+'.vrt')
-        os.remove(amp_looked+'.vrt')
-        os.remove(amp_looked2+'.vrt')
-        os.remove(interferogram_looked+'.vrt')
-        os.remove(interferogram_looked2+'.vrt')
-        #os.remove(cor_looked+'.vrt')
-        #os.remove(cor_looked2+'.vrt')
-        #os.remove(cor_diff_looked+'.vrt')
-        os.remove(lat_looked+'.vrt')
-        os.remove(lon_looked+'.vrt')
+if __name__ == '__main__':
+    try:
+        status = main()
+    except (Exception, SystemExit) as e:
+        with open('_alt_error.txt', 'w') as f:
+            f.write("%s\n" % str(e))
+        with open('_alt_traceback.txt', 'w') as f:
+            f.write("%s\n" % traceback.format_exc())
+        raise
+    sys.exit(status)
+
 
 
 
